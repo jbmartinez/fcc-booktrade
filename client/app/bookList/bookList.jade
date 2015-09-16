@@ -2,7 +2,7 @@
   figure
     img(ng-src="{{ book.cover }}")
     figcaption {{ book.title }}
-  button(ng-hide="book.added || !addBook" ng-click="addBook({idx: $index})")
+  button(ng-hide="book.added || hideAddBtn" ng-click="addBook({idx: $index})")
     = '+'
-  button(ng-click="deleteBook({book: book})")
+  button(ng-hide="hideDeleteBtn" ng-click="deleteBook({book: book})")
     = '-'

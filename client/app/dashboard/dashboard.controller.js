@@ -9,10 +9,6 @@ angular.module('booktradeApp')
     var queryURL = 'https://www.googleapis.com/books/v1/volumes?callback=JSON_CALLBACK&q=';
 
     $scope.queryBook = function(searchStr) {
-      // if ($scope.bookTitle === '') {
-      //   console.log('empty!!');
-      //   return;
-      // }
       $http.jsonp(queryURL + searchStr).then(function(books) {
         console.log(books);
         $scope.bookList = books.data.items.map((book) => {
@@ -47,5 +43,6 @@ angular.module('booktradeApp')
       });
     };
 
+    // TODO: it should fetch only the current user's book
     $http.get('/api/books').success((books) => $scope.ownBooks = books);
   });

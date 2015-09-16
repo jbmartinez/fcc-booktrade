@@ -10,8 +10,11 @@ angular.module('booktradeApp')
         list: '=',
         addBook: '&onAdd',
         deleteBook: '&onDelete'
+      },
+      link: function (scope, element, attrs) {
+        scope.hideAddBtn = attrs.onAdd ? false : true;
+        scope.hideDeleteBtn = attrs.onDelete ? false : true;
+        scope.hideRequestBtn = attrs.onRequest ? false : true;
       }
-      // link: function (scope, element, attrs) {
-      // }
     };
   });
