@@ -43,6 +43,6 @@ angular.module('booktradeApp')
       });
     };
 
-    // TODO: it should fetch only the current user's book
-    $http.get('/api/books').success((books) => $scope.ownBooks = books);
+    $http.get('/api/books/user' + Auth.getCurrentUser()._id)
+      .success((books) => $scope.ownBooks = books);
   });

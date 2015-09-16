@@ -2,14 +2,17 @@
 
 var _ = require('lodash');
 var Book = require('./book.model');
-var gBooks = require('googleapis').books('v1');
-
-// move to env var!!!
-var G_API_KEY = '';
 
 // Get list of books
 exports.index = function(req, res) {
   Book.find(function (err, books) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(books);
+  });
+};
+
+exports.userBooks = function(req, res) {
+  Book.find({owner: req.params.id}, function (err, books) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(books);
   });
@@ -55,16 +58,6 @@ exports.destroy = function(req, res) {
       if(err) { return handleError(res, err); }
       return res.status(204).send('No Content');
     });
-  });
-};
-
-// look for book info and cover using Google Books API
-exports.query = function (req, res) {
-  gBooks.volumes.list({
-    auth: G_API_KEY,
-    q: req.params.q
-  }, function(err, data) {
-    if(err) { return handleError(res, err); }
   });
 };
 
