@@ -1,0 +1,13 @@
+.col-md-12
+  tabset(type='pills')
+    tab(heading='My books')
+      form(ng-submit="queryBook(bookTitle)" class="form-inline")
+        .form-group
+          input(type="text" class="form-control" placeholder="Search title" ng-model="bookTitle")
+          button(type="submit" class="btn btn-primary") Add
+          
+      book-list(list="ownBooks", on-delete="deleteBook(book)")
+      #search
+        book-list(list="bookList", on-add="addBook(idx)")
+
+    tab(heading='My requests')

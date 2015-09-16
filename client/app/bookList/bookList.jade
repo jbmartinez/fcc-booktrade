@@ -1,0 +1,8 @@
+.card(ng-repeat="book in list")
+  figure
+    img(ng-src="{{ book.cover }}")
+    figcaption {{ book.title }}
+  button(ng-hide="book.added || !addBook" ng-click="addBook({idx: $index})")
+    = '+'
+  button(ng-click="deleteBook({book: book})")
+    = '-'
