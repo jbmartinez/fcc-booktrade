@@ -1,9 +1,9 @@
-.card(ng-repeat="book in list")
+.card.col-lg-2.col-sm-4(ng-repeat="book in list")
   figure
-    img(ng-src="{{ book.cover }}")
+    img.cover(ng-src="{{ book.cover }}")
     figcaption {{ book.title }}
-  button(ng-hide="hideTradeBtn" ng-click="addTrade({book: book})") t
-  button(ng-hide="book.added || hideAddBtn" ng-click="addBook({idx: $index})")
+  button.action(ng-hide="hideTradeBtn" ng-click="addTrade({book: book})") t
+  button.action(ng-hide="book.added || hideAddBtn" ng-click="addBook({idx: $index})")
     = '+'
-  button(ng-hide="hideDeleteBtn" ng-click="deleteBook({book: book})")
+  button.action(ng-hide="hideDeleteBtn" ng-click="deleteBook({book: book})")
     = '-'

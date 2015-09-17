@@ -1,16 +1,19 @@
+div(ng-include='"components/navbar/navbar.html"')
+
 .col-md-12
   tabset(type='pills')
     tab(heading='My books')
-      form(ng-submit="queryBook(bookTitle)" class="form-inline")
-        .form-group
-          input(type="text" class="form-control" placeholder="Search title" ng-model="bookTitle")
-          button(type="submit" class="btn btn-primary") Add
-          
-      book-list(list="ownBooks", on-delete="deleteBook(book)")
-      #search
-        book-list(list="bookList", on-add="addBook(idx)")
+      .col-md-12
+        form(ng-submit="queryBook(bookTitle)" class="form-inline")
+          .form-group
+            input(type="text" class="form-control" placeholder="Search title" ng-model="bookTitle")
+            button(type="submit" class="btn btn-primary") Add
+
+        book-list(list="ownBooks", on-delete="deleteBook(book)")
+        #search
+          book-list(list="bookList", on-add="addBook(idx)")
 
     tab(heading='All books')
-      .col-md-8
+      .col-md-12
         book-list(list="allBooks", on-trade="addTrade(book)")
     tab(heading='My requests')

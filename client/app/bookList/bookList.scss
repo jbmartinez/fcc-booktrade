@@ -1,0 +1,22 @@
+.card {
+  margin-bottom: 3em;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cover {
+  display: block;
+  margin: 0 auto;
+}
+
+.action {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  border: none;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  width: 1.8em;
+  height: 1.8em;
+}

@@ -66,5 +66,5 @@ angular.module('booktradeApp')
       .success((books) => $scope.allBooks = books);
 
     $http.get('/api/trades/user/' + Auth.getCurrentUser()._id)
-      .success((trades) => {$scope.trades = trades; console.log(trades)});
+      .success((trades) => $scope.trades = trades);
   });
