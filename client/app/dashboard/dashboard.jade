@@ -10,4 +10,7 @@
       #search
         book-list(list="bookList", on-add="addBook(idx)")
 
+    tab(heading='All books')
+      .col-md-8
+        book-list(list="allBooks", on-trade="addTrade(book)")
     tab(heading='My requests')

@@ -4,6 +4,7 @@ angular.module('booktradeApp')
   .controller('DashboardCtrl', function ($scope, $http, Auth) {
     $scope.bookList = [];
     $scope.ownBooks = [];
+    $scope.allBooks = [];
     $scope.bookTitle = '';
 
     var queryURL = 'https://www.googleapis.com/books/v1/volumes?callback=JSON_CALLBACK&q=';
@@ -43,6 +44,23 @@ angular.module('booktradeApp')
       });
     };
 
-    $http.get('/api/books/user' + Auth.getCurrentUser()._id)
+    $scope.addTrade = function(book) {
+      let newTrade = {
+        bookId: book._id,
+        ownerId: book.owner,
+        fromId: Auth.getCurrentUser()._id,
+        title: book.title
+      };
+      $http.post('/api/trades', newTrade);
+      /* .success((trade) => {
+        $scope.ownBooks.push(book);
+        $scope.bookList[index].added = true;
+      }); */
+    };
+
+    $http.get('/api/books/user/' + Auth.getCurrentUser()._id)
       .success((books) => $scope.ownBooks = books);
+
+    $http.get('/api/books/')
+      .success((books) => $scope.allBooks = books);
   });
