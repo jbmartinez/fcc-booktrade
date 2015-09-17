@@ -5,6 +5,7 @@ angular.module('booktradeApp')
     $scope.bookList = [];
     $scope.ownBooks = [];
     $scope.allBooks = [];
+    $scope.trades = [];
     $scope.bookTitle = '';
 
     var queryURL = 'https://www.googleapis.com/books/v1/volumes?callback=JSON_CALLBACK&q=';
@@ -63,4 +64,7 @@ angular.module('booktradeApp')
 
     $http.get('/api/books/')
       .success((books) => $scope.allBooks = books);
+
+    $http.get('/api/trades/user/' + Auth.getCurrentUser()._id)
+      .success((trades) => {$scope.trades = trades; console.log(trades)});
   });

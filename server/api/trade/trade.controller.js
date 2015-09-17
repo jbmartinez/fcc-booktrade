@@ -20,6 +20,16 @@ exports.show = function(req, res) {
   });
 };
 
+exports.hasUser = function(req, res) {
+  Trade.find({ $or: [ { ownerId: req.params.id }, { fromId: req.params.id } ] },
+    function (err, trade) {
+      if(err) { return handleError(res, err); }
+      if(!trade) { return res.status(404).send('Not Found'); }
+      return res.json(trade);
+    }
+  );
+};
+
 // Creates a new trade in the DB.
 exports.create = function(req, res) {
   Trade.create(req.body, function(err, trade) {
