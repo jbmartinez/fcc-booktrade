@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('booktradeApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('SettingsCtrl', function ($scope, $http, User, Auth) {
     $scope.errors = {};
 
     $scope.changePassword = function(form) {
@@ -17,5 +17,14 @@ angular.module('booktradeApp')
           $scope.message = '';
         });
       }
-		};
+    };
+
+    $scope.changeProfile = function() {
+      // var updatedUser = Auth.getCurrentUser();
+      // updatedUser.name = $scope.name;
+      // updatedUser.city = $scope.city;
+      // updatedUser.state = $scope.state;
+      // updatedUser.country = $scope.country;
+      $http.put('/api/users/' + Auth.getCurrentUser()._id, $scope.user);
+    };
   });

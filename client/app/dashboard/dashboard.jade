@@ -9,11 +9,11 @@ div(ng-include='"components/navbar/navbar.html"')
             input(type="text" class="form-control" placeholder="Search title" ng-model="bookTitle")
             button(type="submit" class="btn btn-primary") Add
 
-        book-list(list="ownBooks", on-delete="deleteBook(book)")
+        book-list.row(list="ownBooks", on-delete="deleteBook(book)")
         #search
-          book-list(list="bookList", on-add="addBook(idx)")
+          book-list.row(list="bookList", on-add="addBook(idx)")
 
     tab(heading='All books')
       .col-md-12
-        book-list(list="allBooks", on-trade="addTrade(book)")
+        book-list.row(list="allBooks", on-trade="addTrade(book)")
     tab(heading='My requests')
