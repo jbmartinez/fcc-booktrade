@@ -2,11 +2,9 @@
   figure
     img.cover(ng-src="{{ book.cover }}")
     figcaption {{ book.title }}
-  button.action(ng-hide="hideTradeBtn" ng-click="addTrade({book: book})")
+  button.action(ng-hide="hideTradeBtn || book.owner === owner" ng-click="addTrade({book: book})")
     i.fa.fa-exchange
   button.action(ng-hide="book.added || hideAddBtn" ng-click="addBook({idx: $index})")
     i.fa.fa-plus
-    = '+'
   button.action(ng-hide="hideDeleteBtn" ng-click="deleteBook({book: book})")
     i.fa.fa-remove
-    = '-'

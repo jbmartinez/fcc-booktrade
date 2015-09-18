@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('booktradeApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  .controller('MainCtrl', function ($scope, $http, $location, socket, Auth) {
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
+      // socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
     $scope.addThing = function() {
@@ -21,7 +21,13 @@ angular.module('booktradeApp')
       $http.delete('/api/things/' + thing._id);
     };
 
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
+    Auth.isLoggedInAsync(function(loggedIn) {
+      if (loggedIn) {
+        $location.path('/dashboard');
+      }
     });
+
+    // $scope.$on('$destroy', function () {
+    //   socket.unsyncUpdates('thing');
+    // });
   });

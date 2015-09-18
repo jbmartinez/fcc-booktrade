@@ -7,9 +7,10 @@ div(ng-include='"components/navbar/navbar.html"')
         .header.col-md-12
           h2 Add more books
           form(ng-submit="queryBook(bookTitle)" class="form-inline")
-            .form-group
+            .input-group
               input(type="text" class="form-control" placeholder="Search title" ng-model="bookTitle")
-              button(type="submit" class="btn btn-primary") search
+              span.input-group-btn
+                button(type="submit" class="btn btn-primary") search
 
         book-list.row(list="ownBooks", on-delete="deleteBook(book)")
         #search.col-md-12(ng-show="searching")
@@ -21,7 +22,7 @@ div(ng-include='"components/navbar/navbar.html"')
 
     tab(heading='All books' ng-click="fetchBooks()")
       .col-md-12
-        book-list.row(list="allBooks", on-trade="addTrade(book)")
+        book-list.row(list="allBooks", on-trade="addTrade(book)", owner="userId")
     tab(heading='My requests')
       .col-md-12
         ul.req-list

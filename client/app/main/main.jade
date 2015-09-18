@@ -2,9 +2,9 @@ div(ng-include='"components/navbar/navbar.html"')
 
 header#banner.hero-unit
   .container
-    h1 'Allo, 'Allo!
-    p.lead Kick-start your next web app with Angular Fullstack
-    img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
+    h1 Booktradr
+    p.lead Trade your books!
+    i.fa.fa-book.logo
 
 .container
   .row
@@ -16,18 +16,18 @@ header#banner.hero-unit
             | {{thing.name}}
             button.close(type='button', ng-click='deleteThing(thing)') ×
 
-  form.thing-form
-    label Syncs in realtime across clients
-    p.input-group
-      input.form-control(type='text', placeholder='Add a new thing here.', ng-model='newThing')
-      span.input-group-btn
-        button.btn.btn-primary(type='submit', ng-click='addThing()') Add New
+  // form.thing-form
+  //   label Syncs in realtime across clients
+  //   p.input-group
+  //     input.form-control(type='text', placeholder='Add a new thing here.', ng-model='newThing')
+  //     span.input-group-btn
+  //       button.btn.btn-primary(type='submit', ng-click='addThing()') Add New
 
 footer.footer
   .container
     p
-      | Angular Fullstack v2.1.1
+      | Build by J. Martínez
       = ' | '
-      a(href='https://twitter.com/tyhenkel') @tyhenkel
+      a(href='https://twitter.com/_jmartinez') @_jmartinez
       = ' | '
-      a(href='https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open') Issues
+      a(href='https://github.com/jbmartinez/fcc-booktrade') GitHub

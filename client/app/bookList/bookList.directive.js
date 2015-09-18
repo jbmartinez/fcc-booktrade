@@ -7,6 +7,7 @@ angular.module('booktradeApp')
       restrict: 'E',
       scope: {
         list: '=',
+        owner: '=',
         addBook: '&onAdd',
         deleteBook: '&onDelete',
         addTrade: '&onTrade'

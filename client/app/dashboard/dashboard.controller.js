@@ -51,7 +51,7 @@ angular.module('booktradeApp')
       let newTrade = {
         bookId: book._id,
         ownerId: book.owner,
-        fromId: Auth.getCurrentUser()._id,
+        fromId: $scope.userId,
         title: book.title
       };
       $http.post('/api/trades', newTrade)
@@ -85,9 +85,9 @@ angular.module('booktradeApp')
         .success((books) => $scope.allBooks = books);
     };
 
-    $http.get('/api/books/user/' + Auth.getCurrentUser()._id)
+    $http.get('/api/books/user/' + $scope.userId)
       .success((books) => $scope.ownBooks = books);
 
-    $http.get('/api/trades/user/' + Auth.getCurrentUser()._id)
+    $http.get('/api/trades/user/' + $scope.userId)
       .success((trades) => $scope.trades = trades);
   });
