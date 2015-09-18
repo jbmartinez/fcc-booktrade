@@ -1,7 +1,7 @@
 div(ng-include='"components/navbar/navbar.html"')
 
 .col-md-12
-  tabset(type='pills')
+  tabset
     tab(heading='My books')
       .col-md-12
         form(ng-submit="queryBook(bookTitle)" class="form-inline")
@@ -17,3 +17,13 @@ div(ng-include='"components/navbar/navbar.html"')
       .col-md-12
         book-list.row(list="allBooks", on-trade="addTrade(book)")
     tab(heading='My requests')
+      .col-md-12
+        ul.req-list
+          li(ng-repeat="req in trades")
+            i.fa.fa-share(ng-show="req.fromId === userId") 
+            i.fa.fa-reply(ng-show="req.ownerId === userId") 
+            | {{ req.title }} 
+            a(href="#" ng-click="cancelRequest(req)")
+              small [cancel] 
+            a(href="#" ng-show="req.ownerId === userId" ng-click="approveRequest(req)")
+              small [approve]

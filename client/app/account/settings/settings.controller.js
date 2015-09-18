@@ -20,11 +20,9 @@ angular.module('booktradeApp')
     };
 
     $scope.changeProfile = function() {
-      // var updatedUser = Auth.getCurrentUser();
-      // updatedUser.name = $scope.name;
-      // updatedUser.city = $scope.city;
-      // updatedUser.state = $scope.state;
-      // updatedUser.country = $scope.country;
-      $http.put('/api/users/' + Auth.getCurrentUser()._id, $scope.user);
+      $http.put('/api/users/' + Auth.getCurrentUser()._id, $scope.user)
+        .then( function() {
+          $scope.profileMessage = 'Profile successfully updated.';
+        });
     };
   });

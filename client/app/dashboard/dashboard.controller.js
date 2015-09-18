@@ -7,6 +7,7 @@ angular.module('booktradeApp')
     $scope.allBooks = [];
     $scope.trades = [];
     $scope.bookTitle = '';
+    $scope.userId = Auth.getCurrentUser()._id;
 
     var queryURL = 'https://www.googleapis.com/books/v1/volumes?callback=JSON_CALLBACK&q=';
 
@@ -28,7 +29,7 @@ angular.module('booktradeApp')
 
     $scope.addBook = function(index) {
       let newBook = $scope.bookList[index];
-      newBook.owner = Auth.getCurrentUser()._id;
+      newBook.owner = $scope.userId;
       $http.post('/api/books', newBook).success((book) => {
         $scope.ownBooks.push(book);
         $scope.bookList[index].added = true;
@@ -37,9 +38,7 @@ angular.module('booktradeApp')
 
     $scope.deleteBook = function(book) {
       $http.delete('/api/books/' + book._id).then((response) => {
-        console.log(response);
         if (response.status === 204) {
-          console.log('deleted');
           $scope.ownBooks = $scope.ownBooks.filter((item) => item._id !== book._id);
         }
       });
@@ -52,16 +51,29 @@ angular.module('booktradeApp')
         fromId: Auth.getCurrentUser()._id,
         title: book.title
       };
-      $http.post('/api/trades', newTrade);
-      /* .success((trade) => {
-        $scope.ownBooks.push(book);
-        $scope.bookList[index].added = true;
-      }); */
+      $http.post('/api/trades', newTrade)
+        .success((trade) => {
+          $scope.trades.push(trade);
+        });
+    };
+
+    $scope.approveRequest = function(trade) {
+      trade.isApproved = true;
+      $http.put('/api/trades/' + trade._id);
+    };
+
+    $scope.cancelRequest = function(trade) {
+      $http.delete('/api/trades/' + trade._id).then((response) => {
+        if (response.status === 204) {
+          $scope.trades = $scope.trades.filter((item) => item._id !== trade._id);
+        }
+      });
     };
 
     $http.get('/api/books/user/' + Auth.getCurrentUser()._id)
       .success((books) => $scope.ownBooks = books);
 
+    // TODO: this should be called only after clicking on the all books tabs
     $http.get('/api/books/')
       .success((books) => $scope.allBooks = books);
 

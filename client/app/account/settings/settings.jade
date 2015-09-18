@@ -20,6 +20,7 @@ div(ng-include='"components/navbar/navbar.html"')
         .form-group
           label Country
             input.form-control(type='text', name='country', ng-model='user.country', mongoose-error='')
+        p.help-block  {{ profileMessage }}
         button.btn.btn-lg.btn-primary(type='submit') Save changes
 
       h2 Change Password
