@@ -8,6 +8,7 @@ angular.module('booktradeApp')
     $scope.trades = [];
     $scope.bookTitle = '';
     $scope.userId = Auth.getCurrentUser()._id;
+    $scope.searching = false;
 
     var queryURL = 'https://www.googleapis.com/books/v1/volumes?callback=JSON_CALLBACK&q=';
 
@@ -15,6 +16,8 @@ angular.module('booktradeApp')
       $http.jsonp(queryURL + searchStr).then(function(books) {
         console.log(books);
         $scope.bookList = books.data.items.map((book) => {
+          $scope.searching = true;
+          console.log('search?', $scope.searching);
           let item = {title: book.volumeInfo.title};
           if ('imageLinks' in book.volumeInfo) {
             item.cover = book.volumeInfo.imageLinks.smallThumbnail;
@@ -70,12 +73,20 @@ angular.module('booktradeApp')
       });
     };
 
+    $scope.hidePanel = function() {
+      $scope.searching = false;
+    };
+    
+    $scope.fetchBooks = function() {
+      if ($scope.allBooks.length > 0) {
+        return;
+      }
+      $http.get('/api/books/')
+        .success((books) => $scope.allBooks = books);
+    };
+
     $http.get('/api/books/user/' + Auth.getCurrentUser()._id)
       .success((books) => $scope.ownBooks = books);
-
-    // TODO: this should be called only after clicking on the all books tabs
-    $http.get('/api/books/')
-      .success((books) => $scope.allBooks = books);
 
     $http.get('/api/trades/user/' + Auth.getCurrentUser()._id)
       .success((trades) => $scope.trades = trades);

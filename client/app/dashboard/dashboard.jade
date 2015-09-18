@@ -3,17 +3,23 @@ div(ng-include='"components/navbar/navbar.html"')
 .col-md-12
   tabset
     tab(heading='My books')
-      .col-md-12
-        form(ng-submit="queryBook(bookTitle)" class="form-inline")
-          .form-group
-            input(type="text" class="form-control" placeholder="Search title" ng-model="bookTitle")
-            button(type="submit" class="btn btn-primary") Add
+      .main.row
+        .header.col-md-12
+          h2 Add more books
+          form(ng-submit="queryBook(bookTitle)" class="form-inline")
+            .form-group
+              input(type="text" class="form-control" placeholder="Search title" ng-model="bookTitle")
+              button(type="submit" class="btn btn-primary") search
 
         book-list.row(list="ownBooks", on-delete="deleteBook(book)")
-        #search
+        #search.col-md-12(ng-show="searching")
+          .row
+            .col-md-9
+              h3 Select some books
+              button.btn.btn-primary(ng-click="hidePanel()") Done!
           book-list.row(list="bookList", on-add="addBook(idx)")
 
-    tab(heading='All books')
+    tab(heading='All books' ng-click="fetchBooks()")
       .col-md-12
         book-list.row(list="allBooks", on-trade="addTrade(book)")
     tab(heading='My requests')
