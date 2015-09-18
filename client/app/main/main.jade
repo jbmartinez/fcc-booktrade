@@ -6,22 +6,20 @@ header#banner.hero-unit
     p.lead Trade your books!
     i.fa.fa-book.logo
 
-.container
+.container.ad
   .row
-    .col-lg-12
-      h1.page-header Features:
-      ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in awesomeThings')
-        li
-          a(href='#', tooltip='{{thing.info}}')
-            | {{thing.name}}
-            button.close(type='button', ng-click='deleteThing(thing)') ×
-
-  // form.thing-form
-  //   label Syncs in realtime across clients
-  //   p.input-group
-  //     input.form-control(type='text', placeholder='Add a new thing here.', ng-model='newThing')
-  //     span.input-group-btn
-  //       button.btn.btn-primary(type='submit', ng-click='addThing()') Add New
+    .col-sm-6
+      i.fa.fa-exchange
+      h2 Trade your books
+      p Give your old books a new life
+    .col-sm-6
+      i.fa.fa-check-circle-o
+      h2 Find new books
+      p Get books from other people in your area
+    // .col-sm-4
+    //   i.fa.fa-exchange
+    //   h2 Share your opinion
+    //   p Let other people know your opinion by answering their polls.
 
 footer.footer
   .container

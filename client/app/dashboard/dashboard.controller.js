@@ -57,6 +57,7 @@ angular.module('booktradeApp')
       $http.post('/api/trades', newTrade)
         .success((trade) => {
           $scope.trades.push(trade);
+          book.requested = true;
         });
     };
 

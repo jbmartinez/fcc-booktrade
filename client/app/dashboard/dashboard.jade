@@ -27,10 +27,10 @@ div(ng-include='"components/navbar/navbar.html"')
       .col-md-12
         ul.req-list
           li(ng-repeat="req in trades")
-            i.fa.fa-share(ng-show="req.fromId === userId") 
-            i.fa.fa-reply(ng-show="req.ownerId === userId") 
+            i.fa.fa-share(ng-if="req.fromId === userId") 
+            i.fa.fa-reply(ng-if="req.ownerId === userId") 
             | {{ req.title }} 
             a(href="#" ng-click="cancelRequest(req)")
               small [cancel] 
-            a(href="#" ng-show="req.ownerId === userId" ng-click="approveRequest(req)")
+            a(href="#" ng-if="req.ownerId === userId" ng-click="approveRequest(req)")
               small [approve]
